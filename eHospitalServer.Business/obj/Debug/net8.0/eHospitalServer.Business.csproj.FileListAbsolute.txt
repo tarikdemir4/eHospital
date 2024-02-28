@@ -1,0 +1,15 @@
+C:\Users\demir\Desktop\eHospitalSon\eHospitalServer\eHospitalServer.Business\bin\Debug\net8.0\eHospitalServer.Business.deps.json
+C:\Users\demir\Desktop\eHospitalSon\eHospitalServer\eHospitalServer.Business\bin\Debug\net8.0\eHospitalServer.Business.dll
+C:\Users\demir\Desktop\eHospitalSon\eHospitalServer\eHospitalServer.Business\bin\Debug\net8.0\eHospitalServer.Business.pdb
+C:\Users\demir\Desktop\eHospitalSon\eHospitalServer\eHospitalServer.Business\bin\Debug\net8.0\eHospitalServer.Entities.dll
+C:\Users\demir\Desktop\eHospitalSon\eHospitalServer\eHospitalServer.Business\bin\Debug\net8.0\eHospitalServer.Entities.pdb
+C:\Users\demir\Desktop\eHospitalSon\eHospitalServer\eHospitalServer.Business\obj\Debug\net8.0\eHospitalServer.Business.csproj.AssemblyReference.cache
+C:\Users\demir\Desktop\eHospitalSon\eHospitalServer\eHospitalServer.Business\obj\Debug\net8.0\eHospitalServer.Business.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\demir\Desktop\eHospitalSon\eHospitalServer\eHospitalServer.Business\obj\Debug\net8.0\eHospitalServer.Business.AssemblyInfoInputs.cache
+C:\Users\demir\Desktop\eHospitalSon\eHospitalServer\eHospitalServer.Business\obj\Debug\net8.0\eHospitalServer.Business.AssemblyInfo.cs
+C:\Users\demir\Desktop\eHospitalSon\eHospitalServer\eHospitalServer.Business\obj\Debug\net8.0\eHospitalServer.Business.csproj.CoreCompileInputs.cache
+C:\Users\demir\Desktop\eHospitalSon\eHospitalServer\eHospitalServer.Business\obj\Debug\net8.0\eHospitalServer.Business.csproj.CopyComplete
+C:\Users\demir\Desktop\eHospitalSon\eHospitalServer\eHospitalServer.Business\obj\Debug\net8.0\eHospitalServer.Business.dll
+C:\Users\demir\Desktop\eHospitalSon\eHospitalServer\eHospitalServer.Business\obj\Debug\net8.0\refint\eHospitalServer.Business.dll
+C:\Users\demir\Desktop\eHospitalSon\eHospitalServer\eHospitalServer.Business\obj\Debug\net8.0\eHospitalServer.Business.pdb
+C:\Users\demir\Desktop\eHospitalSon\eHospitalServer\eHospitalServer.Business\obj\Debug\net8.0\ref\eHospitalServer.Business.dll
