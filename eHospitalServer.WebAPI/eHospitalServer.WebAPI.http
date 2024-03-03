@@ -1,6 +1,23 @@
-@eHospitalServer.WebAPI_HostAddress = http://localhost:5273
+@eHospitalServer.WebAPI_HostAddress = https://localhost:7201
 
-GET {{eHospitalServer.WebAPI_HostAddress}}/weatherforecast/
+GET https://localhost:7201/api/Auth/Get
+Accept: application/json
+Authorization:Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjE4YzNmYzdiLTk4YjYtNGM4ZC05YzM0LTkyZTllMzA4NzQ5ZSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJUYXLEsWsgRGVtaXIiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJhZG1pbkBhZG1pbi5jb20iLCJVc2VyTmFtZSI6ImFkbWluIiwibmJmIjoxNzA5Mzg2MDM4LCJleHAiOjE3MDk0MDA0MzgsImlzcyI6IlRhcsSxayBEZW1pciIsImF1ZCI6IsOWxJ9yZW5jaWxlcmltIn0.hU2pNN4GB6mlDqafM7oK3UjaFXlsVxQE8lBWyt0VlLAVvCcqpROhAI054LI2vbZN_YyYqbHY33kQevEVwhf1hw
+
+###
+
+POST https://localhost:7201/api/Auth/Login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "emailOrUserName":"admin",
+  "password":"1"
+}
+
+###
+
+GET https://localhost:7201/api/Auth/GetTokenByRefreshToken?refreshToken=2b3ba133-5baa-4402-bee2-3c3ec635a870
 Accept: application/json
 
 ###

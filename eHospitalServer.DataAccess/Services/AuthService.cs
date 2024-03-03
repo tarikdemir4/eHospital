@@ -8,8 +8,24 @@ using TS.Result;
 namespace eHospitalServer.DataAccess.Services;
 internal class AuthService(
     UserManager<User> userManager,
-    SignInManager<User>signInManager) : IAuthService
+    SignInManager<User>signInManager,
+    JwtProvider jwtProvider
+    ) : IAuthService
 {
+    public async Task<Result<LoginResponseDto>> GetTokenByRefreshTokenAsync(string refreshToken, CancellationToken cancellationToken)
+    {
+       User? user= await userManager.Users.Where(p=>p.RefreshToken==refreshToken).FirstOrDefaultAsync(cancellationToken);
+
+        if(user is null)
+        {
+            return (500, "Refresh token unavaible");
+        }
+
+        var loginResponse =await jwtProvider.CreateToken(user);
+
+        return loginResponse;
+    }
+
     public async Task<Result<LoginResponseDto>> LoginAsync(LoginRequestDto request, CancellationToken cancellationToken)
     {
         User? user = await userManager.Users.
@@ -43,11 +59,8 @@ internal class AuthService(
             return (500,"Your password is wrong");
         }
 
-        return new LoginResponseDto(
-            "token",
-            "refreshToken",
-            DateTime.Now
-           );
+        var loginResponse = await jwtProvider.CreateToken(user);
 
+        return loginResponse;
     }
 }

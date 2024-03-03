@@ -1,5 +1,6 @@
 ﻿using eHospitalServer.Business.Services;
 using eHospitalServer.DataAccess.Context;
+using eHospitalServer.DataAccess.Options;
 using eHospitalServer.DataAccess.Services;
 using eHospitalServer.Entities.Models;
 using Microsoft.AspNetCore.Identity;
@@ -38,7 +39,23 @@ public static class DependencyInjection
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 
+        services.Configure<JwtOptions>(configuration.GetSection("Jwt"));
+        services.ConfigureOptions<JwtTokenOptionsSetup>();
+
+
+        services.AddAuthentication()
+                .AddJwtBearer();
+        services.AddAuthorizationBuilder();
+
+
+       services.AddScoped<JwtProvider>();
+
         services.AddScoped<IAuthService, AuthService>();
+
+
+
+ 
+
 
         return services;
     }

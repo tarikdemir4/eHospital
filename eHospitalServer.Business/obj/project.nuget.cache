@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0UUn7kmzUcqjQfk7A8TDkm9DlLWzXDPcIUBf8RyKusWRTdZrqzsZ/De0642xLZMFGacRwwDF1HqbADwdYto+5g==",
+  "dgSpecHash": "JAGIJZKFu986B0nKd/zEsAePsDriFs286GDEnUT18Pp8rQuJw27RvooZmX+5OByEw47ae3yq85O82/38wS9+YA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\demir\\Desktop\\eHospitalSon\\eHospitalServer\\eHospitalServer.Business\\eHospitalServer.Business.csproj",
+  "projectFilePath": "C:\\Users\\demir\\Desktop\\YMYP2\\Projeler\\eHospital\\eHospitalServer\\eHospitalServer.Business\\eHospitalServer.Business.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\demir\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\8.0.2\\microsoft.aspnetcore.cryptography.internal.8.0.2.nupkg.sha512",
     "C:\\Users\\demir\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\8.0.2\\microsoft.aspnetcore.cryptography.keyderivation.8.0.2.nupkg.sha512",

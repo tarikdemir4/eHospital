@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\demir\\Desktop\\eHospitalSon\\eHospitalServer\\eHospitalServer.Entities\\eHospitalServer.Entities.csproj": {}
+    "C:\\Users\\demir\\Desktop\\YMYP2\\Projeler\\eHospital\\eHospitalServer\\eHospitalServer.Entities\\eHospitalServer.Entities.csproj": {}
   },
   "projects": {
-    "C:\\Users\\demir\\Desktop\\eHospitalSon\\eHospitalServer\\eHospitalServer.Entities\\eHospitalServer.Entities.csproj": {
+    "C:\\Users\\demir\\Desktop\\YMYP2\\Projeler\\eHospital\\eHospitalServer\\eHospitalServer.Entities\\eHospitalServer.Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\demir\\Desktop\\eHospitalSon\\eHospitalServer\\eHospitalServer.Entities\\eHospitalServer.Entities.csproj",
+        "projectUniqueName": "C:\\Users\\demir\\Desktop\\YMYP2\\Projeler\\eHospital\\eHospitalServer\\eHospitalServer.Entities\\eHospitalServer.Entities.csproj",
         "projectName": "eHospitalServer.Entities",
-        "projectPath": "C:\\Users\\demir\\Desktop\\eHospitalSon\\eHospitalServer\\eHospitalServer.Entities\\eHospitalServer.Entities.csproj",
+        "projectPath": "C:\\Users\\demir\\Desktop\\YMYP2\\Projeler\\eHospital\\eHospitalServer\\eHospitalServer.Entities\\eHospitalServer.Entities.csproj",
         "packagesPath": "C:\\Users\\demir\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\demir\\Desktop\\eHospitalSon\\eHospitalServer\\eHospitalServer.Entities\\obj\\",
+        "outputPath": "C:\\Users\\demir\\Desktop\\YMYP2\\Projeler\\eHospital\\eHospitalServer\\eHospitalServer.Entities\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\demir\\AppData\\Roaming\\NuGet\\NuGet.Config",
