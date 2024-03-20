@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace eHospitalServer.DataAccess;
 public static class DependencyInjection
@@ -15,6 +16,8 @@ public static class DependencyInjection
         this IServiceCollection services,
         IConfiguration configuration)
     {
+
+        services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
         services.AddDbContext<ApplicationDbContext>(options =>
         {
@@ -51,11 +54,7 @@ public static class DependencyInjection
        services.AddScoped<JwtProvider>();
 
         services.AddScoped<IAuthService, AuthService>();
-
-
-
- 
-
+        services.AddScoped<IUserService, UserService>();
 
         return services;
     }

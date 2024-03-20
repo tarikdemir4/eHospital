@@ -247,3 +247,8 @@ C:\Users\demir\Desktop\YMYP2\Projeler\eHospital\eHospitalServer\eHospitalServer.
 C:\Users\demir\Desktop\YMYP2\Projeler\eHospital\eHospitalServer\eHospitalServer.WebAPI\obj\Debug\net8.0\eHospitalServer.WebAPI.pdb
 C:\Users\demir\Desktop\YMYP2\Projeler\eHospital\eHospitalServer\eHospitalServer.WebAPI\obj\Debug\net8.0\eHospitalServer.WebAPI.genruntimeconfig.cache
 C:\Users\demir\Desktop\YMYP2\Projeler\eHospital\eHospitalServer\eHospitalServer.WebAPI\obj\Debug\net8.0\ref\eHospitalServer.WebAPI.dll
+C:\Users\demir\Desktop\YMYP2\Projeler\eHospital\eHospitalServer\eHospitalServer.WebAPI\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\demir\Desktop\YMYP2\Projeler\eHospital\eHospitalServer\eHospitalServer.WebAPI\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+C:\Users\demir\Desktop\YMYP2\Projeler\eHospital\eHospitalServer\eHospitalServer.WebAPI\bin\Debug\net8.0\GenericEmailService.dll
+C:\Users\demir\Desktop\YMYP2\Projeler\eHospital\eHospitalServer\eHospitalServer.WebAPI\bin\Debug\net8.0\MailKit.dll
+C:\Users\demir\Desktop\YMYP2\Projeler\eHospital\eHospitalServer\eHospitalServer.WebAPI\bin\Debug\net8.0\MimeKit.dll

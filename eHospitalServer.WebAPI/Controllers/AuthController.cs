@@ -1,13 +1,12 @@
 ﻿using eHospitalServer.Business.Services;
 using eHospitalServer.Entities.DTOs;
+using eHospitalServer.WebAPI.Abstractions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eHospitalServer.WebAPI.Controllers;
-[Route("api/[controller]/[action]")]
-[ApiController]
 public class AuthController(
-    IAuthService authService) : ControllerBase
+    IAuthService authService) : ApiController
 {
     [HttpPost]
     [AllowAnonymous]
@@ -28,8 +27,19 @@ public class AuthController(
     }
 
     [HttpGet]
-    public IActionResult Get()
+    [AllowAnonymous]
+    public async Task<IActionResult>SendConfirmMail(string email,CancellationToken cancellationToken)
     {
-        return Ok(new {Message="Ok, I get it..."});
+        var response =await authService.SendConfirmEmailAsync(email,cancellationToken);
+        return StatusCode(response.StatusCode, response);   
     }
+
+    [HttpGet]
+    [AllowAnonymous]
+    public async Task<IActionResult> ConfirmEmail(int emailConfirmCode, CancellationToken cancellationToken)
+    {
+        var response = await authService.ConfirmVerificationEmail(emailConfirmCode, cancellationToken);
+        return StatusCode(response.StatusCode, response);
+    }
+
 }

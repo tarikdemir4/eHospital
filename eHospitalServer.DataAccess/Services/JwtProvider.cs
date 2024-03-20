@@ -13,7 +13,7 @@ public  class JwtProvider(
     UserManager<User>userManager,
     IOptions<JwtOptions>jwtOptions)
 {
-    public async Task<LoginResponseDto> CreateToken(User user)
+    public async Task<LoginResponseDto> CreateToken(User user,bool rememberMe)
     {
 
         List<Claim> claims = new()
@@ -27,6 +27,10 @@ public  class JwtProvider(
         DateTime expires = DateTime.UtcNow.AddHours(4);
 
 
+        if (rememberMe)
+        {
+           expires= expires.AddDays(1);
+        }
 
         JwtSecurityToken jwtSecurityToken = new(
             issuer:jwtOptions.Value.Issuer,
