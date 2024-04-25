@@ -8,19 +8,20 @@ using TS.Result;
 namespace eHospitalServer.DataAccess.Services;
 internal class AuthService(
     UserManager<User> userManager,
-    SignInManager<User>signInManager,
+    SignInManager<User> signInManager,
     JwtProvider jwtProvider
     ) : IAuthService
 {
-    public async Task<Result<string>> ConfirmVerificationEmail(int emailConfirmCode, CancellationToken cancellationToken)
+
+    public async Task<Result<string>> ConfirmVerificationEmailAsync(int emailConfirmCode, CancellationToken cancellationToken)
     {
-        User? user = await userManager.Users.Where(p=>p.EmailConfirmCode==emailConfirmCode).FirstOrDefaultAsync(cancellationToken);
-        if(user is null)
+        User? user = await userManager.Users.Where(p => p.EmailConfirmCode == emailConfirmCode).FirstOrDefaultAsync(cancellationToken);
+        if (user is null)
         {
             return Result<string>.Failure(500, "Email confirm code is not avaiable");
         }
 
-        if(user.EmailConfirmed)
+        if (user.EmailConfirmed)
         {
             return Result<string>.Failure(500, "User mail already confirmed");
         }
@@ -33,14 +34,14 @@ internal class AuthService(
 
     public async Task<Result<LoginResponseDto>> GetTokenByRefreshTokenAsync(string refreshToken, CancellationToken cancellationToken)
     {
-       User? user= await userManager.Users.Where(p=>p.RefreshToken==refreshToken).FirstOrDefaultAsync(cancellationToken);
+        User? user = await userManager.Users.Where(p => p.RefreshToken == refreshToken).FirstOrDefaultAsync(cancellationToken);
 
-        if(user is null)
+        if (user is null)
         {
             return (500, "Refresh token unavaible");
         }
 
-        var loginResponse =await jwtProvider.CreateToken(user,false);
+        var loginResponse = await jwtProvider.CreateToken(user, false);
 
         return loginResponse;
     }
@@ -53,12 +54,12 @@ internal class AuthService(
                                    p.NormalizedEmail == request.EmailOrUserName.ToUpper(),
                                    cancellationToken);
 
-        if(user is null)
+        if (user is null)
         {
             return (500, "User not found");
         }
 
-        SignInResult signInResult = await signInManager.CheckPasswordSignInAsync(user,request.Password,true);
+        SignInResult signInResult = await signInManager.CheckPasswordSignInAsync(user, request.Password, true);
         if (signInResult.IsLockedOut)
         {
             TimeSpan? timeSpan = user.LockoutEnd - DateTime.UtcNow;
@@ -70,15 +71,15 @@ internal class AuthService(
 
         if (signInResult.IsNotAllowed)
         {
-            return (500,"Your e-mail address is not confirmed");
+            return (500, "Your e-mail address is not confirmed");
         }
 
         if (!signInResult.Succeeded)
         {
-            return (500,"Your password is wrong");
+            return (500, "Your password is wrong");
         }
 
-        var loginResponse = await jwtProvider.CreateToken(user,request.RememberMe);
+        var loginResponse = await jwtProvider.CreateToken(user, request.RememberMe);
 
         return loginResponse;
     }
@@ -104,13 +105,82 @@ internal class AuthService(
         await userManager.UpdateAsync(user);
         #region Send Mail Verificaiton 
         string subject = " Verification Mail";
-        string body =CreateConfirmEmailBody(user.EmailConfirmCode.ToString());
+        string body = CreateConfirmEmailBody(user.EmailConfirmCode.ToString());
         var stringEmailResponse = await EmailHelper.SendEmailAsync(user.Email ?? "", subject, body);
         #endregion    
 
         return Result<string>.Succeed("Verification mail is sent succesfully");
     }
-    private  string CreateConfirmEmailBody(string emailConfirmCode)
+    public async Task<Result<string>> ChangePasswordUsingForgotPasswordCodeAsync(ChangePasswordUsingForgotPasswordCodeDto request, CancellationToken cancellationToken)
+    {
+        User? user = await userManager.Users.FirstOrDefaultAsync(p => p.ForgotPasswordCode ==request.ForgotPasswordCode , cancellationToken);
+        if (user is null)
+        {
+            return Result<string>.Failure(500, "Your Recovery password Code is invalid");
+        }
+
+        if (user.ForgotPasswordCodeSendDate < DateTime.UtcNow)
+        {
+            return Result<string>.Failure(500, "Your recovery password code is invalid");
+        }
+
+        var token = await userManager.GeneratePasswordResetTokenAsync(user);
+
+        IdentityResult result = await userManager.ResetPasswordAsync(user, token, request.NewPassword);
+
+        if(!result.Succeeded)
+        {
+            return Result<string>.Failure(500,result.Errors.Select(s=>s.Description).ToList());
+        }
+
+        user.ForgotPasswordCode = null;
+        user.ForgotPasswordCodeSendDate = null;
+
+        result = await userManager.UpdateAsync(user);
+
+        if (!result.Succeeded)
+        {
+            return Result<string>.Failure(500,result.Errors.Select(s=>s.Description).ToList());
+        }
+
+        return Result<string>.Succeed("Your password is changed.You can sign in using new password");
+    }
+
+    public async Task<Result<string>> SendForgotPasswordEmailAsync(string emailOrUsername, CancellationToken cancellationToken)
+    {
+        User? user = await userManager.Users.FirstOrDefaultAsync(p => p.Email == emailOrUsername || p.UserName == emailOrUsername, cancellationToken);
+
+        if (user is null)
+        {
+            return Result<string>.Failure(500, "User not found");
+        }
+
+        Random random = new();
+        bool isFargotPasswordCodeExists = true;
+        int forgotPasswordCode = 0;
+        while (isFargotPasswordCodeExists)
+        {
+            forgotPasswordCode = random.Next(111111, 999999);
+            isFargotPasswordCodeExists = await userManager.Users.AnyAsync(p => p.ForgotPasswordCode == forgotPasswordCode, cancellationToken);
+        }
+
+        user.ForgotPasswordCode = forgotPasswordCode;
+        user.ForgotPasswordCodeSendDate = DateTime.UtcNow.AddMinutes(5);
+
+        await userManager.UpdateAsync(user);
+
+        #region Send Mail Verificaiton 
+        string subject = " Reset Your Password";
+        string body = CreateSendForgotPasswordEmailBody(forgotPasswordCode.ToString());
+        var stringEmailResponse = await EmailHelper.SendEmailAsync(user.Email ?? "", subject, body);
+        #endregion   
+        
+        string email=MaskEmail(user.Email ?? "");
+
+        return Result<string>.Succeed($"Password recovery code is sent to your {email} email adress");
+    }
+
+    private string CreateConfirmEmailBody(string emailConfirmCode)
     {
         string body = @"
 <!DOCTYPE html>
@@ -180,4 +250,103 @@ internal class AuthService(
 
         return body;
     }
+
+    private string CreateSendForgotPasswordEmailBody(string forgotPasswordCode)
+    {
+        string body = @"
+<!DOCTYPE html>
+<html lang=""en"">
+<head>
+    <meta charset=""UTF-8"">
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+    <title>Email Confirmation Code</title>
+    <style>
+        /* Stil özellikleri */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+        .confirmation-code {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            margin-left: 50px;
+        }
+        .digit-container {
+            display: flex;
+            width: auto; /* Kutu genişliğini artır */
+            height: auto;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            margin-right: 10px;
+            font-size: 55px;
+            font-weight: bold;
+            color: #007bff;
+            text-align: center;
+            inherit: text-align;
+        }
+    </style>
+</head>
+<body>
+    <div class=""container"">
+        <h2 style=""color: #007bff;"">Reset Your Password</h2>
+        <p>Please use the following code to reset your password:</p>
+        <div class=""confirmation-code"">
+            <!-- Her bir rakam için ayrı bir kutu oluşturuluyor -->
+            <div class=""digit-container""> <div style=""padding-right: 20px; padding-left: 20px; ""> " + forgotPasswordCode[0] + @" </div></div>
+            <div class=""digit-container""> <div style=""padding-right: 20px; padding-left: 20px; ""> " + forgotPasswordCode[1] + @" </div></div>
+            <div class=""digit-container""> <div style=""padding-right: 20px; padding-left: 20px; ""> " + forgotPasswordCode[2] + @" </div></div>
+            <div class=""digit-container""> <div style=""padding-right: 20px; padding-left: 20px; ""> " + forgotPasswordCode[3] + @" </div></div>
+            <div class=""digit-container""> <div style=""padding-right: 20px; padding-left: 20px; ""> " + forgotPasswordCode[4] + @" </div></div>
+            <div class=""digit-container""> <div style=""padding-right: 20px; padding-left: 20px; ""> " + forgotPasswordCode[5] + @" </div></div>
+        </div>
+        <p style=""margin-top: 20px;"">This code will expire in 5 minutes.</p>
+    </div>
+</body>
+</html>
+";
+
+        return body;
+    }
+
+    private string MaskEmail(string email)
+    {
+        var atIndex = email.IndexOf('@');
+        if (atIndex == -1) return email; // Geçerli bir e-posta adresi değilse, değişiklik yapmadan döndür
+
+        var username = email.Substring(0, atIndex);
+        var domain = email.Substring(atIndex + 1);
+
+        var maskedUsername = username.Length > 1
+            ? username[0] + new string('*', username.Length - 2) + username[^1]
+            : username; // Kullanıcı adı çok kısa ise maskelenmez
+
+        var domainParts = domain.Split('.');
+        if (domainParts.Length > 1)
+        {
+            var domainName = domainParts[0];
+            var maskedDomainName = domainName.Length > 2
+                ? domainName.Substring(0, 2) + new string('*', domainName.Length - 2)
+                : domainName; // Alan adı çok kısa ise maskelenmez
+
+            var maskedDomain = maskedDomainName + "." + string.Join(".", domainParts[1..]);
+            return maskedUsername + "@" + maskedDomain;
+        }
+
+        return maskedUsername + "@" + domain; // E-posta adresinde nokta yoksa veya tanımlanamazsa
+    }
 }
+

@@ -230,7 +230,6 @@ C:\Users\demir\Desktop\YMYP2\Projeler\eHospital\eHospitalServer\eHospitalServer.
 C:\Users\demir\Desktop\YMYP2\Projeler\eHospital\eHospitalServer\eHospitalServer.WebAPI\obj\Debug\net8.0\eHospitalServer.WebAPI.AssemblyInfoInputs.cache
 C:\Users\demir\Desktop\YMYP2\Projeler\eHospital\eHospitalServer\eHospitalServer.WebAPI\obj\Debug\net8.0\eHospitalServer.WebAPI.AssemblyInfo.cs
 C:\Users\demir\Desktop\YMYP2\Projeler\eHospital\eHospitalServer\eHospitalServer.WebAPI\obj\Debug\net8.0\eHospitalServer.WebAPI.csproj.CoreCompileInputs.cache
-C:\Users\demir\Desktop\YMYP2\Projeler\eHospital\eHospitalServer\eHospitalServer.WebAPI\obj\Debug\net8.0\eHospitalServer.WebAPI.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\demir\Desktop\YMYP2\Projeler\eHospital\eHospitalServer\eHospitalServer.WebAPI\obj\Debug\net8.0\eHospitalServer.WebAPI.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\demir\Desktop\YMYP2\Projeler\eHospital\eHospitalServer\eHospitalServer.WebAPI\obj\Debug\net8.0\eHospitalServer.WebAPI.sourcelink.json
 C:\Users\demir\Desktop\YMYP2\Projeler\eHospital\eHospitalServer\eHospitalServer.WebAPI\obj\Debug\net8.0\staticwebassets.build.json
@@ -252,3 +251,5 @@ C:\Users\demir\Desktop\YMYP2\Projeler\eHospital\eHospitalServer\eHospitalServer.
 C:\Users\demir\Desktop\YMYP2\Projeler\eHospital\eHospitalServer\eHospitalServer.WebAPI\bin\Debug\net8.0\GenericEmailService.dll
 C:\Users\demir\Desktop\YMYP2\Projeler\eHospital\eHospitalServer\eHospitalServer.WebAPI\bin\Debug\net8.0\MailKit.dll
 C:\Users\demir\Desktop\YMYP2\Projeler\eHospital\eHospitalServer\eHospitalServer.WebAPI\bin\Debug\net8.0\MimeKit.dll
+C:\Users\demir\Desktop\YMYP2\Projeler\eHospital\eHospitalServer\eHospitalServer.WebAPI\obj\Debug\net8.0\eHospitalServer.WebAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\demir\Desktop\YMYP2\Projeler\eHospital\eHospitalServer\eHospitalServer.WebAPI\bin\Debug\net8.0\GenericRepository.dll

@@ -1,8 +1,11 @@
 ﻿using eHospitalServer.Business.Services;
 using eHospitalServer.DataAccess.Context;
 using eHospitalServer.DataAccess.Options;
+using eHospitalServer.DataAccess.Repositories;
 using eHospitalServer.DataAccess.Services;
 using eHospitalServer.Entities.Models;
+using eHospitalServer.Entities.Repositories;
+using GenericRepository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -25,6 +28,8 @@ public static class DependencyInjection
                    .UseNpgsql(configuration.GetConnectionString("PostgreSQL"))
                    .UseSnakeCaseNamingConvention();
         });
+
+        services.AddScoped<IUnitOfWork>(srv=>srv.GetRequiredService<ApplicationDbContext>());
 
         services
             .AddIdentity<User,IdentityRole<Guid>>(cfr =>
@@ -55,6 +60,9 @@ public static class DependencyInjection
 
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IAppointmentService, AppointmentService>();
+        services.AddScoped<IAppointmentRepository, AppointmentRepository>();
+
 
         return services;
     }

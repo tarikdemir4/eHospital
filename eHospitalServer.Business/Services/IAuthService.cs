@@ -8,5 +8,7 @@ public interface IAuthService
 
     Task<Result<LoginResponseDto>> GetTokenByRefreshTokenAsync(string refreshToken, CancellationToken cancellationToken);
     Task<Result<string>> SendConfirmEmailAsync(string email, CancellationToken cancellationToken);
-    Task<Result<string>>ConfirmVerificationEmail(int emailConfirmCode,CancellationToken cancellationToken);
+    Task<Result<string>>ConfirmVerificationEmailAsync(int emailConfirmCode,CancellationToken cancellationToken);
+    Task<Result<string>>SendForgotPasswordEmailAsync(string emailOrUsername,CancellationToken cancellationToken);
+    Task<Result<string>>ChangePasswordUsingForgotPasswordCodeAsync(ChangePasswordUsingForgotPasswordCodeDto request, CancellationToken cancellationToken);
 }

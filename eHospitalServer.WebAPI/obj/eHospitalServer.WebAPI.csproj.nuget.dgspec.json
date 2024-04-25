@@ -124,27 +124,31 @@
               "target": "Package",
               "version": "[8.0.3, )"
             },
+            "EntityFrameworkCore.GenericRepository.Nuget": {
+              "target": "Package",
+              "version": "[8.0.1, )"
+            },
             "GenericEmailService": {
               "target": "Package",
               "version": "[8.0.0, )"
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
-              "version": "[8.0.2, )"
+              "version": "[8.0.3, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.2, )"
+              "version": "[8.0.3, )"
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
-              "version": "[8.0.2, )"
+              "version": "[8.0.3, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.2, )"
+              "version": "[8.0.3, )"
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
@@ -207,9 +211,13 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "EntityFrameworkCore.GenericRepository.Nuget": {
+              "target": "Package",
+              "version": "[8.0.1, )"
+            },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.2, )"
+              "version": "[8.0.3, )"
             }
           },
           "imports": [
@@ -276,11 +284,11 @@
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.2, )"
+              "version": "[8.0.3, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.4.0, )"
+              "version": "[6.5.0, )"
             }
           },
           "imports": [
